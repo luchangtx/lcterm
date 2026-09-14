@@ -1,0 +1,69 @@
+# ============================================================
+# TermDeck .gitignore
+# 只提交源码、资源、脚本与依赖锁文件；
+# 编译产物、运行时凭据、本机私有配置一律不入库。
+# ============================================================
+
+# ---------- SwiftPM / Xcode 编译产物 ----------
+.build/
+.swiftpm/
+DerivedData/
+*.dSYM/
+*.o
+*.hmap
+*.swiftmodule
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcuserstate
+
+# ---------- 打包 / 分发产物（make_app.sh、make_dmg.sh 生成）----------
+build/
+*.app/
+*.dmg
+*.pkg
+AppIcon.iconset/
+
+# ---------- 运行时隐私数据 ----------
+# 应用默认写往 ~/Library/Application Support/TermDeck/；
+# 这里兜底，防止调试时把本机数据拷进仓库一起提交。
+# 以下分别为：主机地址/用户名列、加密后的密码与私钥口令、
+# 加密主密钥、SSH 主机密钥指纹（TOFU 信任记录）。
+hosts.json
+secrets.json
+.secret-key
+known-hosts.json
+
+# ---------- 密钥与本地私有配置 ----------
+.env
+.env.*
+*.local
+*.pem
+*.key
+*.ppk
+*.ovpn
+.ssh/
+id_rsa*
+id_ed25519*
+id_ecdsa*
+
+# ---------- macOS 系统文件 ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+Icon?
+
+# ---------- 编辑器 / IDE ----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ---------- 故意不忽略 ----------
+# Package.resolved       锁定依赖版本，需要提交
+# Resources/AppIcon.icns 应用图标，属源码资源
