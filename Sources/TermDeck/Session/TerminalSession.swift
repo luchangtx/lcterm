@@ -147,9 +147,11 @@ final class SessionManager: ObservableObject {
         }
 
         view.processDelegate = coordinator
+        // -l 让 zsh 以 login shell 启动（argv[0] 不带前导短横线时 zsh 会跳过
+        // /etc/zprofile 与 ~/.zprofile，PATH 因此缺少 Homebrew 的 /usr/local/bin）
         view.startProcess(
             executable: "/bin/zsh",
-            args: [],
+            args: ["-l"],
             environment: localEnvironment(),
             execName: "zsh",
             currentDirectory: AppSettings.resolvedLocalShellCwd()

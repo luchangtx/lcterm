@@ -50,6 +50,10 @@ struct ContentView: View {
             sessionManager.onSSHDisconnected = { ssh in
                 ssh.fileBrowser.bind(session: nil)
             }
+            // 启动即开一个本地终端；判空是为了 onAppear 重复触发时不重复开
+            if sessionManager.sessions.isEmpty {
+                sessionManager.newLocalShell()
+            }
         }
         .onChange(of: appearanceRaw) { raw in
             let mode = AppearanceMode(rawValue: raw) ?? .system
